@@ -11,10 +11,6 @@
 
 <body>
   <style>
-
-    .datepicker-date-display {
-      background-color: red;
-    }
     .navbar-fixed {
       margin-bottom: 100px;
     }
@@ -22,6 +18,29 @@
     .nav-wrapper {
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .card-title-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .card-tabs {
+      margin-top: 20px;
+    }
+
+    .custom-card {
+      display: flex;
+      justify-content: center;
+      width: 600px;
+      margin-left: 0 auto;
+    }
+
+    .tab-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
     }
 
     .card-create-account {
@@ -32,6 +51,7 @@
       font-family: GillSans, Calibri, Trebuchet, sans-serif;
     }
   </style>
+
   <div class="navbar-fixed">
     <ul id="dropdown1" class="dropdown-content">
       <li><a href="#!">example</a></li>
@@ -50,116 +70,157 @@
       </div>
     </nav>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col s12 m6 offset-m3">
-        <div class="card">
-          <div class="card-content">
-            <!-- <span class="card-title">Login</span> -->
-            <form id="event-form">
-              <span class="card-title">Create New Event!</span>
-              <!-- <div class="input-field">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
-                      </div>
-                      <div class="input-field">
-                        <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
-                      </div> -->
-              <div class="input-field">
-                <input id="event-name" type="text" class="validate">
-                <label for="event-name">Event Name</label>
-              </div>
-              <div class="input-field">
-                <input id="event-description" type="text" class="validate">
-                <label for="event-description">Brief Description of Event...</label>
-              </div>
-              <div class="input-field">
-                <input id="event-type" type="text" class="validate">
-                <label for="event-type">Event Type</label>
-              </div>
-              <div class="input-field">
-                <input id="event-street" type="text" class="validate">
-                <label for="event-street">Street Address</label>
-              </div>
-              <div class="input-field">
-                <input id="event-city" type="text" class="validate">
-                <label for="event-city">City</label>
-              </div>
-              <div class="input-field">
-                <input id="event-state" type="text" class="validate">
-                <label for="event-state">State</label>
-              </div>
-              <div class="input-field">
-                <input id="event-zip" type="text" class="validate">
-                <label for="event-zip">Zip Code</label>
-              </div>
-              <div class="input-field">
-                <input id="event-date" type="text" class="datepicker">
-                <label for="event-date">Date of Event</label>
-              </div>
-              <div class="row">
-                <div class="col s12 m6">
-                  <button class="btn waves-effect waves-light red" type="submit">Create Event</button>
+  <!-- <div class="row">
+    <div id="xtabs" class="col s12">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab col s2"><a href="#event-info">Event Info</a></li>
+        <li class="tab col s2"><a href="#guest-list">Guest List</a></li>
+        <li class="tab col s2"><a href="#menu">Menu</a></li>
+      </ul>
+    </div>
+    <div id="event-info" class="col s4">
+    
+        <div class="input-field">
+            <input id="new-fname" type="text" class="validate">
+            <label for="new-fname">First Name</label>
+          </div>
+          <div class="input-field">
+            <input id="new-lname" type="text" class="validate">
+            <label for="new-lname">Last Name</label>
+          </div>
+          <div class="input-field">
+            <input id="username-signup" type="text" class="validate">
+            <label for="username-signup">Username</label>
+          </div>
+          <div class="input-field">
+            <input id="street-signup" type="text" class="validate">
+            <label for="street-signup">Street Address</label>
+          </div>
+          <div class="input-field">
+            <input id="city-signup" type="text" class="validate">
+            <label for="city-signup">City</label>
+          </div>
+          <div class="input-field">
+            <input id="state-signup" type="text" class="validate">
+            <label for="state-signup">State</label>
+          </div>
+          <div class="input-field">
+            <input id="zip-signup" type="text" class="validate">
+            <label for="zip-signup">Zip Code</label>
+          </div>
+          <div class="input-field">
+            <input id="new-allergy" type="text" class="validate">
+            <label for="new-allergy">Allergy</label>
+          </div>
+      <div class="input-field">
+        <input id="new-email" type="email" class="validate">
+        <label for="new-email">Email</label>
+      </div>
+      <div class="input-field">
+        <input id="new-password" type="password" class="validate">
+        <label for="new-password">Password</label>
+      </div>
+        </div>
+    </div>
+    <div id="guest-list" class="col s4">
+      <div id="guest-list" class="col s4">
+        <div class="input-field">
+          <input type="text" id="guest-name">
+          <label for="guest-name">Guest Name</label>
+        </div>
+      </div>
+    </div>
+    <div id="menu" class="col s4">
+      <div id="menu" class="col s4">
+        <div class="input-field">
+          <input type="text" id="main-course">
+          <label for="main-course">Main Course</label>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title-container">
+            <span class="card-title">Create and Event!</span>
+          </div>
+        </div>
+        <div class="card-tabs">
+          <ul class="tabs">
+            <li class="tab col s4"><a href="#tab1">Event Info</a></li>
+            <li class="tab col s4"><a href="#tab2">Invite Guests</a></li>
+            <li class="tab col s4"><a href="#tab3">Create Menu</a></li>
+          </ul>
+        </div>
+        <div class="card-content center">
+          <div id="tab1">
+            <span class="card-title">Event Info</span>
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">Event Name</label>
                 </div>
-                <!-- <div class="col s12 m6">
-                          <a class="waves-effect waves-light red btn" id="next-page-btn" href="#">Next</a>
-                        </div> -->
-              </div>
-            </form>
-
-            <!-- <form id="event-page2-form" class="card-create-account">
-                        <span class="card-title">Create an Account</span>
-                        <div class="input-field">
-                            <input id="new-fname" type="text" class="validate">
-                            <label for="new-fname">First Name</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="new-lname" type="text" class="validate">
-                            <label for="new-lname">Last Name</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="username-signup" type="text" class="validate">
-                            <label for="username-signup">Username</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="street-signup" type="text" class="validate">
-                            <label for="street-signup">Street Address</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="city-signup" type="text" class="validate">
-                            <label for="city-signup">City</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="state-signup" type="text" class="validate">
-                            <label for="state-signup">State</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="zip-signup" type="text" class="validate">
-                            <label for="zip-signup">Zip Code</label>
-                          </div>
-                          <div class="input-field">
-                            <input id="new-allergy" type="text" class="validate">
-                            <label for="new-allergy">Allergy</label>
-                          </div>
-                      <div class="input-field">
-                        <input id="new-email" type="email" class="validate">
-                        <label for="new-email">Email</label>
-                      </div>
-                      <div class="input-field">
-                        <input id="new-password" type="password" class="validate">
-                        <label for="new-password">Password</label>
-                      </div>
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <button class="btn waves-effect waves-light red" type="submit">Create Account</button>
-                        </div>
-                        <div class="col s12 m6">
-                          <a class="waves-effect waves-light red btn" id="cancel-btn" href="#">Cancel</a>
-                        </div>
-                      </div>
-                    </form> -->
-
+                <div class="input-field col s12">
+                  <input id="password" type="password" class="validate">
+                  <label for="password">Event Description</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">Event Type</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="password" type="password" class="validate">
+                  <label for="password">Street Address</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">City</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="password" type="password" class="validate">
+                  <label for="password">State</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">Zip Code</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="password" type="password" class="validate">
+                  <label for="password">Date</label>
+                </div>
+                <div class="row">
+                </div>
+          </div>
+          <div id="tab2">
+            <span class="card-title">Invite Guests</span>
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+            <div class="row">
+            </div>
+          </div>
+          <div id="tab3">
+            <span class="card-title">Create Menu</span>
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+            <div class="row">
+            </div>
+          </div>
+          <div class="card-action tab-buttons">
+            <a class="waves-effect waves-light btn" id="prev-btn">Previous</a>
+            <a class="waves-effect waves-light btn" id="next-btn">Next</a>
           </div>
         </div>
       </div>
@@ -169,32 +230,62 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="/assets/js/script.js"></script>
   <script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //   var createAccountForm = document.getElementById('event-page2-form');
-    //   var createAccountBtn = document.getElementById('next-page-btn');
-    //   var cancelBtn = document.getElementById('cancel-btn');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   var tabs = document.querySelectorAll('.tabs');
+    //   M.Tabs.init(tabs, { swipeable: true });
     // });
 
-    //   createAccountBtn.addEventListener('click', function (event) {
-    //     event.preventDefault();
-    //     createAccountForm.style.display = 'block';
-    //     document.getElementById('event-form').style.display = 'none';
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   var tabs = document.querySelectorAll('.tabs');
+    //   M.Tabs.init(tabs);
+    // });
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   var tabs = document.querySelectorAll('.tabs');
+    //   var prevBtn = document.getElementById('prev-btn');
+    //   var nextBtn = document.getElementById('next-btn');
+    //   var activeTab = 0;
+
+    //   M.Tabs.init(tabs);
+
+    //   prevBtn.addEventListener('click', function() {
+    //     if (activeTab > 0) {
+    //       activeTab--;
+    //       M.Tabs.getInstance(tabs).select(activeTab);
+    //     }
     //   });
 
-    //   cancelBtn.addEventListener('click', function (event) {
-    //     event.preventDefault();
-    //     createAccountForm.style.display = 'none';
-    //     document.getElementById('login-form').style.display = 'block';
+    //   nextBtn.addEventListener('click', function() {
+    //     if (activeTab < tabs.length - 1) {
+    //       activeTab++;
+    //       M.Tabs.getInstance(tabs).select(activeTab);
+    //     }
     //   });
+    // });
 
-      document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.datepicker');
-    var options = {
-      defaultDate: new Date(),
-      format: 'yyyy-mm-dd'
-    };
-    var instances = M.Datepicker.init(elems, options);
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+      var tabs = document.querySelector('.tabs');
+      var prevBtn = document.getElementById('prev-btn');
+      var nextBtn = document.getElementById('next-btn');
+      var instance = M.Tabs.init(tabs);
+      var activeTab = instance.index;
+
+      prevBtn.addEventListener('click', function() {
+        if (activeTab > 0) {
+          activeTab--;
+          instance.select(activeTab);
+        }
+      });
+
+      nextBtn.addEventListener('click', function() {
+        if (activeTab < instance.tabs.length - 1) {
+          activeTab++;
+          instance.select(activeTab);
+        }
+      });
+    });
+
   </script>
 </body>
+
 </html>

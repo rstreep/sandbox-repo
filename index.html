@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <title>Quiz</title>
+  <style>
+    /* Add your custom CSS styles here */
+  </style>
+</head>
+<body>
+  <h1>Quiz</h1>
+  <div id="quiz-container">
+    <h2 id="question">Question</h2>
+    <ul id="choices">
+      <!-- Add your questions and choices here -->
+    </ul>
+    <button id="submit-btn">Submit</button>
+  </div>
+  <div id="scoreboard" style="display: none;">
+    <h2>Scoreboard</h2>
+    <p id="score"></p>
+    </div>
+    <div id="timer">
+      Time Remaining: <span id="time">90</span> sec
+    </div>
+
+  <script>
+    // Define your quiz questions and choices here
+    const questions = [
+      {
+        question: "What does CSS stand for?",
+        choices: ["Coordinated Selective Styles", "Cascading Style Sheets", "Challenging Style Software", "Control System Shutdown"],
+        correctAnswer: 1
+      },
+      {
+        question: "Which tag will provide the largest size to a header?",
+        choices: ["<h1>", "<h3>", "<h4>", "<h6>"],
+        correctAnswer: 0
+      },
+      {
+        question: "An error(s) in code that impacts the way a program runs is refferred to as a ____",
+        choices: ["Splat", "Rat", "Bug", "Slug"],
+        correctAnswer: 2
+      },
+      {
+        question: "What does MERN stand for in coding?",
+        choices: ["Mangos, Eggplant, Raspberry, Nectarines", "MongoDB, Express, React, Node.js", "Monkey's eat raw noodles", "Modifiable Existential Raccoon Network"],
+        correctAnswer: 1
+      },
+      {
+        question: "Which of the following about HTML semantic tags is true?",
+        choices: ["Your code will break without the use of semantic tags", "Improper semantic tag use will result in your mom unfriending you on facebook", "There is no benefit to using semantic tags", "Semantic tags allow screen readers to better communicate your content to blind/visually impaired users"],
+        correctAnswer: 3
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let timeRemaining = 90;
+    let timerElement = document.getElementById('time');
+    let timer;
+
+    function displayQuestion() {
+      const questionElement = document.getElementById("question");
+      const choicesElement = document.getElementById("choices");
+
+      questionElement.textContent = questions[currentQuestion].question;
+      choicesElement.innerHTML = "";
+
+      for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = questions[currentQuestion].choices[i];
+        li.addEventListener("click", handleAnswer);
+        choicesElement.appendChild(li);
+      }
+    }
+
+    function handleAnswer(event) {
+      const selectedChoice = event.target;
+      const selectedAnswer = selectedChoice.textContent;
+      const correctAnswer = questions[currentQuestion].choices[questions[currentQuestion].correctAnswer];
+
+      if (selectedAnswer === correctAnswer) {
+        score++;
+      } else {
+        timeRemaining -= 10;
+      }
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        displayQuestion();
+      } else {
+        endQuiz();
+      }
+    }
+
+    function startTimer() {
+      timer = setInterval(() => {
+        timeRemaining--;
+        timerElement.textContent = timeRemaining;
+
+        if (timeRemaining <= 0) {
+          clearInterval(timer);
+          endQuiz();
+        }
+      }, 1000);
+    }
+
+    function endQuiz() {
+      clearInterval(timer);
+
+      const quizContainer = document.getElementById("quiz-container");
+      const scoreboard = document.getElementById("scoreboard");
+      const scoreElement = document.getElementById("score");
+
+      quizContainer.style.display = "none";
+      scoreboard.style.display = "block";
+
+      scoreElement.textContent = `Score: ${score}`;
+    }
+
+    // Start the quiz
+    displayQuestion();
+    startTimer();
+  </script>
+</body>
+</html>

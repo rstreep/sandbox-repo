@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
+import AnimalGame from './pages/AnimalGame';
 
 function App() {
   const [count, setCount] = useState(0)

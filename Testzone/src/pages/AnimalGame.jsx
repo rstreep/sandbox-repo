@@ -79,10 +79,17 @@ export default function Animals() {
   const [randomAnimal, setRandomAnimal] = useState('');
   const [message, setMessage] = useState('');
   const [displayAnimals, setDisplayAnimals] = useState([]);
+  const [score, setScore] = useState(0);
+  const [questionCount, setQuestionCount] = useState(0);
+  const [gameOver, setGameOver] = useState(false); // Track game over state
 
   useEffect(() => {
-    generateQuestion();
-  }, []);
+    if (questionCount >= 10) {
+      setGameOver(true); // End the game after 10 questions
+    } else {
+      generateQuestion();
+    }
+  }, [questionCount]);
 
   const generateQuestion = () => {
     const randomIndex = Math.floor(Math.random() * allAnimals.length);
@@ -90,19 +97,27 @@ export default function Animals() {
     setMessage('');
 
     const availableAnimals = allAnimals.filter(animal => animal.name !== allAnimals[randomIndex].name);
-    const shuffledAnimals = shuffleArray(availableAnimals).slice(0, 3); // Selecting 3 random animals
-    setDisplayAnimals([...shuffledAnimals, allAnimals[randomIndex]]); // Including the correct animal
+    const shuffledAnimals = shuffleArray(availableAnimals).slice(0, 3);
+    const animalsWithCorrectAnswer = [...shuffledAnimals, allAnimals[randomIndex]];
+    const shuffledDisplayAnimals = shuffleArray(animalsWithCorrectAnswer);
+    setDisplayAnimals(shuffledDisplayAnimals);
+  };
+
+  const handleStartOver = () => {
+    setScore(0);
+    setQuestionCount(0);
+    setGameOver(false);
+    generateQuestion();
   };
 
   const checkAnimal = (selectedAnimal) => {
     if (selectedAnimal === randomAnimal.name) {
-      setMessage('Correct! Generating a new question...');
-      setTimeout(() => {
-        generateQuestion();
-      }, 1500);
+      setMessage('Correct!');
+      setScore(prevScore => prevScore + 1); // Increment score
     } else {
       setMessage('Wrong! Try again.');
     }
+    setQuestionCount(prevCount => prevCount + 1); // Increment question count
   };
 
   const shuffleArray = (array) => {
@@ -121,22 +136,39 @@ export default function Animals() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex flex-col items-center justify-center">
-      <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-4">Click on the {randomAnimal.name}!</h2>
-
+    <div className="bg-white h-screen flex flex-col items-center justify-center">
+      {gameOver ? (
+        <div>
+          <div className="flex flex-col items-center justify-center">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 mb-4">
+            Game Over! Your score: {score} out of 10
+          </h1>
+          <button
+            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleStartOver}
+          >
+            Start Over
+          </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 mb-4">Click on the {randomAnimal.name}!</h1>
       <div className="flex flex-row space-x-4">
         {displayAnimals.map((animal, index) => (
           <div
             key={index}
-            className="group relative bg-gray-100 p-1 rounded-md shadow-sm cursor-pointer"
+            className="bg-gray-100 p-1 rounded-md shadow-sm cursor-pointer"
             onClick={() => checkAnimal(animal.name)}
           >
             <div className="aspect-w-2 aspect-h-3 overflow-hidden bg-gray-200 group-hover:opacity-75">
-              <img
-                src={animal.image}
-                alt={`Image of ${animal.name}`}
-                className="object-cover object-center w-full h-full"
-              />
+              <div className="h-full w-full bg-white p-2">
+                <img
+                  src={animal.image}
+                  alt={`Image of ${animal.name}`}
+                  className="object-cover object-center w-full h-full"
+                />
+              </div>
             </div>
             <div className="mt-1">
               <h3 className="text-xs font-medium text-gray-900"></h3>
@@ -146,5 +178,7 @@ export default function Animals() {
       </div>
       <p className="mt-4">{message}</p>
     </div>
+      )}
+      </div>
   );
 };
